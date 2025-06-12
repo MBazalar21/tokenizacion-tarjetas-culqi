@@ -3,7 +3,7 @@ import * as validator from 'validator';
 import {ICard}  from '../../../core/interfaces/card/ICard'
 import {ICardDoc} from '../../../core/interfaces/card/ICardDoc'
 import {ICardModelInterface} from '../../../core/interfaces/card/ICardModelInterface'
-import { generateSecureToken } from '../../../domain/utils/generateSecureToken';
+import { generateSecureToken } from '../../../domain/utils/secureToken';
 
 const cardSchema = new mongoose.Schema({
   card_number: {
@@ -111,7 +111,7 @@ cardSchema.pre('save', function (next) {
   } else {
     this.cardType = 'Desconocido';
   }
-  const { token, rawToken,expiresAt } = generateSecureToken();
+  const token = generateSecureToken();
   this.tokenCulqi = 'pk_test_' + token
   
   next();

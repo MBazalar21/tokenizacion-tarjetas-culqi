@@ -20,4 +20,18 @@ export class CardRepository implements ICardRepository {
       return errorResponse('Error interno del servidor',500);
     }
   }
+  async findByToken(token: string): Promise<any> {
+    try {
+      const card = await Card.findOne({tokenCulqi: token}).exec();
+      if (!card) {
+        return errorResponse(`Tarjeta con Token ${token} no encontrada.`,400);
+      }
+      return card;
+    } catch (error:any) {
+      console.error('Error al buscar tarjeta por Token:', error);
+      const status = error.statusCode || 500;
+      const message = error.message || 'Error interno del servidor';
+      return errorResponse(message,status);
+    }
+  }
 }
