@@ -57,10 +57,11 @@ const cardSchema = new mongoose.Schema({
         if (expiration_year.length !== 4) {
           return false;
         }
-        if (!/^(202[0-8]|202[0-8])$/.test(expiration_year)) {
-          return false;
-        }
-        return true;
+        const currentYear = new Date().getFullYear();
+        const year = parseInt(expiration_year, 10);
+
+        // Validar que esté entre el año actual y +5 años
+        return year >= currentYear && year <= currentYear + 5;
       },
       message: 'Año de expiración Invalida'
     }

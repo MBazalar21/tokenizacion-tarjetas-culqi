@@ -1,0 +1,138 @@
+openapi: 3.0.4
+info:
+  title: Swagger Tokenización de Tarjetas Culqi - OpenAPI 3.0
+  description: |-
+    Este proyecto implementa un sistema de tokenización de tarjetas de forma segura usando Node.js, TypeScript y MongoDB. Su objetivo es generar, cifrar y validar tokens únicos temporales (válidos por 15 minutos) asociados a tarjetas de crédito/débito, cumpliendo con buenas prácticas de seguridad y arquitectura limpia.
+
+  contact:
+    email: hecormartin1994@gmail.com
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  version: 0.0.1
+servers:
+  - url: http://localhost:3000/
+tags:
+  - name: card
+paths:
+  /card/tokens:
+    post:
+      tags:
+        - card
+      summary: Crear un método para simular la tokenización de una tarjeta de crédito/débito.
+      description: Crear un método para simular la tokenización de una tarjeta de crédito/débito.
+      operationId: createCard
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Card'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CardResponse'
+        default:
+          description: Error interno del servidor
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /card/find/{token}:
+    get:
+      tags:
+        - card
+      summary: Obtener los datos de la tarjeta.
+      description: Obtener los datos de la tarjeta.
+      operationId: findCard
+      parameters:
+        - name: token
+          in: path
+          description: token autogenerado
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CardFind'
+        default:
+          description: Error interno del servidor
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+components:
+  schemas:
+    Card:
+      type: object
+      properties:
+        email:
+          type: string
+          example: hectormartin1994@gmail.com
+        card_number:
+          type: number
+          example: '41111111111111111'
+        cvv:
+          type: number
+          example: '123'
+        expiration_year:
+          type: string
+          example: '2030'
+        expiration_month:
+          type: string
+          example: '12'
+    CardResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          example: '45asd4dsa54ds651c6a55d5d4s54'
+        email:
+          type: string
+          example: hectormartin1994@gmail.com
+        card_number:
+          type: number
+          example: '41111111111111111'
+        cvv:
+          type: number
+          example: '123'
+        cardType:
+          type: string
+          example: 'Visa or Mastercard'
+        expiration_year:
+          type: string
+          example: '2030'
+        expiration_month:
+          type: string
+          example: '12'
+        tokenCulqi:
+          type: string
+          example: 'pk_test_Hku54DE68xf54f86'
+    CardFind:
+      type: object
+      properties:
+        card_number:
+          type: number
+          example: '41111111111111111'
+        expiration_year:
+          type: string
+          example: '2030'
+        expiration_month:
+          type: string
+          example: '12'
+    Error:
+      type: object
+      properties:
+        statusCode:
+          type: string
+        message:
+          type: string
+      required:
+        - statusCode
+        - message
