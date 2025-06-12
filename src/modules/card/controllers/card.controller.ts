@@ -11,7 +11,7 @@ export const createCardController = (req: IncomingMessage, res: ServerResponse) 
     req.on('end', async () => {
       const data = JSON.parse(body);
       const result:any= await service.createCard(data);
-      if(result.statusCode != 201){
+      if(result.statusCode && result.statusCode != 201){
         res.writeHead(result.statusCode, { 'Content-Type': 'application/json' });
         return res.end(JSON.stringify(result));
       }
@@ -27,7 +27,7 @@ export const createCardController = (req: IncomingMessage, res: ServerResponse) 
 export const findCardController = async (req: IncomingMessage, res: ServerResponse,token: string) => {
  try {
     const result: any = await service.findCard(token);
-    if (result.statusCode !== 200) {
+    if (result.statusCode && result.statusCode !== 200) {
       res.writeHead(result.statusCode, { 'Content-Type': 'application/json' });
       return res.end(JSON.stringify(result));
     }
