@@ -1,0 +1,9 @@
+{
+  "card_number": 4111111111111111,
+  "cvv": 123,
+  "cardType": "Visa or Mastercard",
+  "tokenCulqi": "pk_test_XXXX", 
+  "expiration_month": "09",
+  "expiration_year": "2026",
+  "email": "hectormartin1994@gmail.com"
+}
