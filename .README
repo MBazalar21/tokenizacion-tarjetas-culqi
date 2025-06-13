@@ -62,6 +62,7 @@ MONGO_URI=mongodb://accesoapp/database #Ruta de mongodb
 * dotenv
 * crypto (nativo)
 * ts-node / nodemon
+* jest/jest-cucumber
 
 ## Scripts
 
