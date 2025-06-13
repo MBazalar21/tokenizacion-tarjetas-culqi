@@ -110,3 +110,17 @@ npm start
 
 
 
+## Ejecución de Tests
+
+Comando para ejecutar los test
+
+```bash
+  npm run test
+```
+
+## SWAGGER
+
+Una vez todo lo que se requiera del proyecto este instalado y ejecutado de manera local, se puede observar y probar aqui el swagger que nos documenta las apis que tiene , segun lo estructurado.
+
+[Swagger](http://localhost:3000/docs)
+
